@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bjerkio/oidc-react.git"
+    "url": "git+https://github.com/lijianyu1985/oidc-react.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bjerkio/oidc-react/issues"
+    "url": "https://github.com/lijianyu1985/oidc-react/issues"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.4.0",
@@ -69,7 +69,7 @@
       }
     }
   },
-  "homepage": "https://github.com/bjerkio/oidc-react#readme",
+  "homepage": "https://github.com/lijianyu1985/oidc-react#readme",
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0"
