@@ -19,11 +19,11 @@ export const hasCodeInUrl = (location: Location): boolean => {
 
   return Boolean(
     searchParams.get('code') ||
-      searchParams.get('id_token') ||
-      searchParams.get('session_state') ||
-      hashParams.get('code') ||
-      hashParams.get('id_token') ||
-      hashParams.get('session_state'),
+    searchParams.get('id_token') ||
+    searchParams.get('session_state') ||
+    hashParams.get('code') ||
+    hashParams.get('id_token') ||
+    hashParams.get('session_state'),
   );
 };
 
@@ -33,37 +33,44 @@ export const hasCodeInUrl = (location: Location): boolean => {
  * @param props
  */
 export const initUserManager = (props: AuthProviderProps): UserManager => {
-  if (props.userManager) return props.userManager;
-  const {
-    authority,
-    clientId,
-    clientSecret,
-    redirectUri,
-    silentRedirectUri,
-    postLogoutRedirectUri,
-    responseType,
-    scope,
-    automaticSilentRenew,
-    loadUserInfo,
-    popupWindowFeatures,
-    popupRedirectUri,
-    popupWindowTarget,
-  } = props;
-  return new UserManager({
-    authority,
-    client_id: clientId,
-    client_secret: clientSecret,
-    redirect_uri: redirectUri,
-    silent_redirect_uri: silentRedirectUri || redirectUri,
-    post_logout_redirect_uri: postLogoutRedirectUri || redirectUri,
-    response_type: responseType || 'code',
-    scope: scope || 'openid',
-    loadUserInfo: loadUserInfo != undefined ? loadUserInfo : true,
-    popupWindowFeatures: popupWindowFeatures,
-    popup_redirect_uri: popupRedirectUri,
-    popupWindowTarget: popupWindowTarget,
-    automaticSilentRenew,
-  });
+  if (window.userManager) {
+    return window.userManager;
+  }
+  if (props.userManager) {
+    window.userManager = props.userManager;
+  } else {
+    const {
+      authority,
+      clientId,
+      clientSecret,
+      redirectUri,
+      silentRedirectUri,
+      postLogoutRedirectUri,
+      responseType,
+      scope,
+      automaticSilentRenew,
+      loadUserInfo,
+      popupWindowFeatures,
+      popupRedirectUri,
+      popupWindowTarget,
+    } = props;
+    window.userManager = new UserManager({
+      authority,
+      client_id: clientId,
+      client_secret: clientSecret,
+      redirect_uri: redirectUri,
+      silent_redirect_uri: silentRedirectUri || redirectUri,
+      post_logout_redirect_uri: postLogoutRedirectUri || redirectUri,
+      response_type: responseType || 'code',
+      scope: scope || 'openid',
+      loadUserInfo: loadUserInfo != undefined ? loadUserInfo : true,
+      popupWindowFeatures: popupWindowFeatures,
+      popup_redirect_uri: popupRedirectUri,
+      popupWindowTarget: popupWindowTarget,
+      automaticSilentRenew,
+    });
+  }
+  return window.userManager;
 };
 
 /**
